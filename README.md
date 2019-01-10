@@ -121,7 +121,7 @@ class=format.json_formatter.JSONFormatter
  "process": 11916,
  "@timestamp": "2019-01-10T12:50:20.392Z",
  "host_name": "your-PC",
- "host_ip": "192.168.10.789",
+ "host_ip": "192.168.10.11",
  "message": {
   "exception_id": 22000
  },
