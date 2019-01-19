@@ -21,7 +21,7 @@ class HostIp:
         return cls.host_name, cls.host_ip
 
 
-REMOVE_ATTR = ["filename", "module", "exc_text", "stack_info", "created", "msecs", "relativeCreated", "exc_info", "msg"]
+REMOVE_ATTR = ["filename", "module", "exc_text", "stack_info", "created", "msecs", "relativeCreated", "exc_info", "msg", "args"]
 
 
 class JSONFormatter(logging.Formatter):
@@ -31,7 +31,13 @@ class JSONFormatter(logging.Formatter):
         extra = self.build_record(record)
         self.set_format_time(extra)  # set time
         self.set_host_ip(extra)  # set host name and host ip
-        extra['message'] = record.msg  # set message
+        if isinstance(record.msg, dict):
+            extra['message'] = record.msg  # set message
+        else:
+            if record.args:
+                extra['msg'] = "'" + record.msg + "'," + str(record.args).strip('()')
+            else:
+                extra['message'] = record.msg
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)
         if self._fmt == 'pretty':
