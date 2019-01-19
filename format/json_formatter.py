@@ -37,7 +37,7 @@ class JSONFormatter(logging.Formatter):
             if record.args:
                 extra['msg'] = "'" + record.msg + "'," + str(record.args).strip('()')
             else:
-                extra['message'] = record.msg
+                extra['msg'] = record.msg
         if record.exc_info:
             extra['exc_info'] = self.formatException(record.exc_info)
         if self._fmt == 'pretty':
