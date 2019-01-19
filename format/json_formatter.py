@@ -32,7 +32,7 @@ class JSONFormatter(logging.Formatter):
         self.set_format_time(extra)  # set time
         self.set_host_ip(extra)  # set host name and host ip
         if isinstance(record.msg, dict):
-            extra['message'] = record.msg  # set message
+            extra['data'] = record.msg  # set message
         else:
             if record.args:
                 extra['msg'] = "'" + record.msg + "'," + str(record.args).strip('()')
